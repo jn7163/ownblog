@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{%block title%}LCY's Blog{% endblock %}
+{% block beforecontent %}
+	<h2>Welcome To My Blog</h2>
+	<h4></h4><!--just a little title-->
+{% endblock %}
+{% block content %}
+	<div class="passages-list">
+		<div>
+			<p>New Passages</p>
+		</div>
+		{% if passages %}
+			{% for passage in passages %}
+				<div class="title-content">
+					<h5><a class="title-link" href="{% url 'passage' passage.id %}">{{passage.title}}</a></h5>
+					<div class="title-info">
+						<div class="passage-info">{{passage.info}}</div>
+						<div class="passage-time">{{passage.time}}</div>
+					</div>
+				</div>
+			{% endfor %}
+			<div class="page-content"><a href="{% url 'passages' 1 %}">watch more ...</a></div>
+		{% else %}
+			<p>There are no passage.</p>
+		{% endif %}
+	</div>	
+{% endblock %}

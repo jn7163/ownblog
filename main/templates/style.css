@@ -1,0 +1,47 @@
+		body{
+			background-color: #EEE0E5;
+		}
+		.content{
+			background-color: #FFFFFF;
+			margin: 70px 20% 15px;
+			padding: 20px;
+		}
+		.comment{
+			background-color: #FFFFFF;
+			margin: 15px 20% 15px;		
+			padding: 10px;	
+		}
+		.addcomment{
+			background-color: #FFFFFF;
+			margin: 15px 20% 15px;
+			padding: 10px;
+		}
+		textarea{
+			width:75%; 
+			height:200px;
+			font-size:14px; 
+			}
+		.inputtext{
+			width:50%;
+			font-size:18px; 
+			}
+		.header{
+			background: #262626;
+			padding: 12px;
+			position:fixed;
+			top:0; 
+			width:100%; 
+			height: 30px;
+			text-align:center;
+			}
+		.header_a{
+			/*background-position:center;*/
+			text-align:center;
+			text-decoration:none;
+			font-size:24px;
+			color:#96CDCD;
+		}
+		a{
+			text-decoration:none;
+			color:#000000;
+		}

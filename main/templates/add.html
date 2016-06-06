@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{%block content%}
+{% if request.user.is_authenticated %}
+<form method="POST">
+	{% csrf_token %}
+	<label for="title">title</label><input type="text" name="title" id="title" style="width:100%;"><br>
+	<label for="body">body</label><br><textarea name="body" id="body" style="height:700px;width:100%;"></textarea>
+	<br>
+	<button type="submit">submit</button>
+</form>
+
+{% endif %}
+{% endblock %}

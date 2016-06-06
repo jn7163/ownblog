@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block title %}Blog page{{page}}{% endblock %}
+{% block content %}
+	<div class="passages-list">
+		{% if passages %}
+			{% for passage in passages %}
+				<div class="title-content">
+					<h5><a class="title-link" href="{% url 'passage' passage.id %}">{{passage.title}}</a></h5>
+					<div class="title-info">
+						<div class="passage-info">{{passage.info}}</div>
+						<div class="passage-time">{{passage.time}}</div>
+					</div>
+				</div>
+			{% endfor %}			
+		{% else %}
+			<p>There are no passage.</p>
+		{% endif %}
+		<div class="page-content">
+			{% if beforepage %}
+				&nbsp;<a href="{% url 'passages' 1 %}">first page</a>&nbsp;
+				&nbsp;<a href="{% url 'passages' beforepage %}">last page</a>&nbsp;
+			{% endif %}
+			{% for pages in betweenpagesbefore %}
+				&nbsp;<a href="{% url 'passages' pages %}">{{ pages }}</a>&nbsp;
+			{% endfor %}
+				&nbsp;{{page}}&nbsp;
+			{% for pages in betweenpagesnext %}
+				&nbsp;<a href="{% url 'passages' pages %}">{{ pages }}</a>&nbsp;
+			{% endfor %}
+			{% if nextpage %}				
+				&nbsp;<a href="{% url 'passages' nextpage %}">next page</a>&nbsp;
+				&nbsp;<a href="{% url 'passages' allpagenum %}">final page</a>&nbsp;
+			{% endif %}
+		</div>
+	</div>	
+{% endblock %}

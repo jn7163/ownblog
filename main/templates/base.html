@@ -1,0 +1,81 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>{% block title %}{% endblock %}</title>
+	<script type="text/javascript">
+	{% block js %}
+
+	{% endblock %}
+	</script>
+	<style type="text/css">
+			body{
+			background-color: #EEE0E5;
+		}
+		.content{
+			background-color: #FFFFFF;
+			margin: 70px 20% 15px;
+			padding: 20px;
+		}
+		.comment{
+			background-color: #FFFFFF;
+
+		}
+		.addcomment{
+			background-color: #FFFFFF;
+
+		}
+		textarea{
+			width:75%; 
+			height:200px;
+			font-size:14px; 
+			}
+		.inputtext{
+			width:50%;
+			font-size:18px; 
+			}
+		.header{
+			background: #262626;
+			padding: 12px;
+			position:fixed;
+			top:0; 
+			width:100%; 
+			height: 30px;
+			text-align:center;
+			}
+		.header_a{
+			/*background-position:center;*/
+			text-align:center;
+			text-decoration:none;
+			font-size:24px;
+			color:#96CDCD;
+		}
+		a{
+			text-decoration:none;
+			color:#000000;
+		}
+		a:hover {
+			color: #ff7f24;  
+ 			text-decoration: underline;
+		}
+
+	</style>
+</head>
+	<body>
+	<header class="header">
+		<a href="{% url 'index' %}" class="header_a">主页</a>
+						
+		<a href="{% url 'passages' '1' %}" class="header_a">我的文章</a>
+		<a href="{% url 'about' %}" class="header_a">关于我</a>	
+		<a href="http://lichunown.github.io/" class="header_a">github.io</a>	
+	</header>
+	<div class="beforecontent">
+		{% block beforecontent %}
+	{% endblock %}
+	</div>
+	<div class="content">
+	{% block content %}
+	{% endblock %}
+	</div>
+	</body>
+</html>

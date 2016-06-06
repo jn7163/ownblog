@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{%block title%}{{passage.title}}-LCY's Blog{% endblock %}
+
+{%block content%}
+<div class="passage"> 
+	<h2>{{passage.title}}</h2>
+	<div class="passage-info">{{passage.info}}</div>
+	<div class="passage-time">{{passage.time}}</div>
+	<br><br>
+	<div class="passage-body">{{passage.body|safe}}</div>
+</div>
+<div class="comment">
+	<h4>评论</h4>
+	<div class="comment=list">
+	{% for comment in comments %}
+		<h5>
+		{% if not comment.ifhideip %}
+			{{comment.ip}}{% else %}匿名用户{% if request.user.is_authenticated %}{{comment.ip}}{% endif %}
+		{% endif %}
+		</h5>
+		<div class="comment-body">
+		{% if comment.ifsafe %}{{comment.body|safe}}{% else %}{{ comment.body }}{% endif %}
+
+		</div>
+		<div class="comment-time">{{comment.time}}</div>
+	{% empty %}
+		<p>there's no comments</p>
+	{% endfor %}
+	</div>
+	<br/><br/>
+	<div class="page-content">
+		{% if beforepage %}
+			&nbsp;<a href="{% url 'passage' passage.id 1 %}">first page</a>&nbsp;
+			&nbsp;<a href="{% url 'passage' passage.id beforepage %}">last page</a>&nbsp;
+		{% endif %}
+		{% for pages in betweenpagesbefore %}
+			&nbsp;<a href="{% url 'passage' passage.id pages %}">{{ pages }}</a>&nbsp;
+		{% endfor %}
+			&nbsp;{{page}}&nbsp;
+		{% for pages in betweenpagesnext %}
+			&nbsp;<a href="{% url 'passage' passage.id pages %}">{{ pages }}</a>&nbsp;
+		{% endfor %}
+		{% if nextpage %}				
+			&nbsp;<a href="{% url 'passage' passage.id nextpage %}">next page</a>&nbsp;
+			&nbsp;<a href="{% url 'passage' passage.id allpagenum %}">final page</a>&nbsp;
+		{% endif %}
+	</div>
+</div>
+<div class="addcomment">
+	<form method="POST">
+		{% csrf_token %}
+		<h4>回复</h4>
+		<label for="ifhideip">隐藏IP</label><input type="checkbox" name="ifhideip" id="ifhideip">
+		&nbsp;&nbsp;&nbsp;
+		<label for="ifsafe">使用HTML</label><input type="checkbox" name="ifsafe" id="ifsafe">
+		<br>
+		<textarea name="body"></textarea>
+		<br>
+		<input type="submit" value="submit">
+	</form>
+</div>
+{% if request.user.is_authenticated %}<br><br><div>访问数：{{passage.accessamount.amount}}</div>{%endif%}
+{%endblock%}
