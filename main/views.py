@@ -21,14 +21,14 @@ def addaccessamount(pid):
     accessamount.save()
 
 def index(request,page=1):
-    passages=Passage.objects.order_by('-time')[(int(page)-1)*30:int(page)*30]
+    passages=Passage.objects.order_by('-time')[(int(page)-1)*6:int(page)*6]
     context={
         'passages':passages,    	
     }
     return render(request,'index.html',context)
 
 def passages(request,page):
-    pinpagenum=2#passage in pages num
+    pinpagenum=10#passage in pages num
     passages=Passage.objects.order_by('-time')[(int(page)-1)*pinpagenum:int(page)*pinpagenum]
     allpassagenum=Passage.objects.count()
     allpagenum=int(allpassagenum)/pinpagenum
@@ -102,13 +102,13 @@ def add(request):
     if request.user.is_authenticated():
         if request.method=="POST":
             passage=Passage()
-            passage.title=request.POST['title']
-            passage.body=request.POST['body']
-            passage.time=timezone.now()
-            passage.info=request.POST.get('info')
+            passage.title = request.POST['title']
+            passage.body = request.POST['body']
+            passage.time = timezone.now()
+            passage.info = request.POST.get('info')
             passage.save()
-            accessamount=Accessamount()
-            accessamount.passage=passage
+            accessamount = Accessamount()
+            accessamount.passage = passage
             accessamount.amount=0
             accessamount.save()
             return HttpResponseRedirect("/"+str(passage.id))

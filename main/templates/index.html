@@ -7,7 +7,7 @@
 {% block content %}
 	<div class="passages-list">
 		<div>
-			<p>New Passages</p>
+			<p>最新动态</p>
 		</div>
 		{% if passages %}
 			{% for passage in passages %}
@@ -19,7 +19,7 @@
 					</div>
 				</div>
 			{% endfor %}
-			<div class="page-content"><a href="{% url 'passages' 1 %}">watch more ...</a></div>
+			<div class="page-content"><a href="{% url 'passages' 1 %}">更多文章 ……</a></div>
 		{% else %}
 			<p>There are no passage.</p>
 		{% endif %}

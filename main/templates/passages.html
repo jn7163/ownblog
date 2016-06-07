@@ -17,8 +17,8 @@
 		{% endif %}
 		<div class="page-content">
 			{% if beforepage %}
-				&nbsp;<a href="{% url 'passages' 1 %}">first page</a>&nbsp;
-				&nbsp;<a href="{% url 'passages' beforepage %}">last page</a>&nbsp;
+				&nbsp;<a href="{% url 'passages' 1 %}">第1页</a>&nbsp;
+				&nbsp;<a href="{% url 'passages' beforepage %}">上一页</a>&nbsp;
 			{% endif %}
 			{% for pages in betweenpagesbefore %}
 				&nbsp;<a href="{% url 'passages' pages %}">{{ pages }}</a>&nbsp;
@@ -28,8 +28,8 @@
 				&nbsp;<a href="{% url 'passages' pages %}">{{ pages }}</a>&nbsp;
 			{% endfor %}
 			{% if nextpage %}				
-				&nbsp;<a href="{% url 'passages' nextpage %}">next page</a>&nbsp;
-				&nbsp;<a href="{% url 'passages' allpagenum %}">final page</a>&nbsp;
+				&nbsp;<a href="{% url 'passages' nextpage %}">下一页</a>&nbsp;
+				&nbsp;<a href="{% url 'passages' allpagenum %}">尾页</a>&nbsp;
 			{% endif %}
 		</div>
 	</div>	
