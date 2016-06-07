@@ -19,6 +19,13 @@ def addaccessamount(pid):
         return 0
     accessamount.amount+=1
     accessamount.save()
+def check(string):
+    if string=='':
+        return 'none'
+    elif string.find('<script') != -1:
+        return 'script'
+    else:
+        return 'ok'
 
 def index(request,page=1):
     passages=Passage.objects.order_by('-time')[(int(page)-1)*6:int(page)*6]
@@ -55,24 +62,39 @@ def passage1(request,pid):
 
 def passage(request,pid,commentpage):
     commentinpage=10
+    context2={}
     addaccessamount(pid)
     passage=Passage.objects.get(id=pid)
-    if request.method=="POST":
+    if request.method=="POST":        
         comment=Comment()
         comment.time=timezone.now()
         comment.passage=passage
         comment.ip=getIPFromDJangoRequest(request)
         comment.body=request.POST['body']
-        print request.POST.get('ifshowip'),request.POST.get('ifsafe')
         if request.POST.get('ifhideip')=='on':
             comment.ifhideip=True
         else:
             comment.ifhideip=False
         if request.POST.get('ifsafe')=='on':
-            comment.ifsafe=True
+            comment.ifsafe=True            
         else:
             comment.ifsafe=False
-        comment.save()
+        result = check(request.POST.get('body')) 
+        print result                                             
+        if result=='ok':
+            comment.save()
+        elif result=='none':
+            context2['error']='none' 
+            context2 = dict(context2.items()+request.POST.items()) 
+            print context2             
+        elif result=='script':
+            if comment.ifsafe: 
+                context2['error']='script'
+                context2 = dict(context2.items()+request.POST.items())
+            else:
+                comment.save()     
+        else:
+            pass        
     comments=passage.comment_set.order_by('-time')[(int(commentpage)-1)*commentinpage:int(commentpage)*commentinpage]
     allpassagenum=passage.comment_set.count()
     allpagenum=int(allpassagenum)/commentinpage
@@ -89,6 +111,8 @@ def passage(request,pid,commentpage):
         'betweenpagesbefore':betweenpagesbefore,
         'betweenpagesnext':betweenpagesnext,
     }
+    if context2.items():
+        context=dict(context.items()+context2.items())
     if int(commentpage)>1:
         context['beforepage']=int(commentpage)-1
     if int(commentpage)<allpagenum:

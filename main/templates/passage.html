@@ -50,11 +50,15 @@
 	<form method="POST">
 		{% csrf_token %}
 		<h4>回复</h4>
+		{% if error %}<p style="color:red;">
+		{% ifequal error 'none' %}回复内容不能为空白{% endifequal %}
+		{% ifequal error 'script' %}HTML中就不要写script了……{% endifequal %}
+		</p>{% endif %}
 		<label for="ifhideip">隐藏IP</label><input type="checkbox" name="ifhideip" id="ifhideip">
 		&nbsp;&nbsp;&nbsp;
 		<label for="ifsafe">使用HTML</label><input type="checkbox" name="ifsafe" id="ifsafe">
 		<br>
-		<textarea name="body"></textarea>
+		<textarea name="body">{% if error %}{{body}}{% endif %}</textarea>
 		<br>
 		<input type="submit" value="submit">
 	</form>
