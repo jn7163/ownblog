@@ -4,6 +4,7 @@
 <form method="POST">
 	{% csrf_token %}
 	<label for="title">title</label><input type="text" name="title" id="title" style="width:100%;"><br>
+	<label for="info">info</label><br><textarea name="info" id="info" style="height:700px;width:100%;"></textarea>
 	<label for="body">body</label><br><textarea name="body" id="body" style="height:700px;width:100%;"></textarea>
 	<br>
 	<button type="submit">submit</button>

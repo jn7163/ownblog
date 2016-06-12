@@ -9,9 +9,10 @@
 	<br><br>
 	<div class="passage-body">{{passage.body|safe}}</div>
 </div>
-<div class="comment">
+<a name="comments"></a>	
+<div class="comment">	
 	<h4>评论</h4>
-	<div class="comment=list">
+	<div class="comment=list">	
 	{% for comment in comments %}
 		<h5>
 		{% if not comment.ifhideip %}
@@ -30,19 +31,19 @@
 	<br/><br/>
 	<div class="page-content">
 		{% if beforepage %}
-			&nbsp;<a href="{% url 'passage' passage.id 1 %}">first page</a>&nbsp;
-			&nbsp;<a href="{% url 'passage' passage.id beforepage %}">last page</a>&nbsp;
+			&nbsp;<a href="{% url 'passage' passage.id 1 %}#comments">首页</a>&nbsp;
+			&nbsp;<a href="{% url 'passage' passage.id beforepage %}#comments">上一页</a>&nbsp;
 		{% endif %}
 		{% for pages in betweenpagesbefore %}
-			&nbsp;<a href="{% url 'passage' passage.id pages %}">{{ pages }}</a>&nbsp;
+			&nbsp;<a href="{% url 'passage' passage.id pages %}#comments">{{ pages }}</a>&nbsp;
 		{% endfor %}
 			&nbsp;{{page}}&nbsp;
 		{% for pages in betweenpagesnext %}
-			&nbsp;<a href="{% url 'passage' passage.id pages %}">{{ pages }}</a>&nbsp;
+			&nbsp;<a href="{% url 'passage' passage.id pages %}#comments">{{ pages }}</a>&nbsp;
 		{% endfor %}
 		{% if nextpage %}				
-			&nbsp;<a href="{% url 'passage' passage.id nextpage %}">next page</a>&nbsp;
-			&nbsp;<a href="{% url 'passage' passage.id allpagenum %}">final page</a>&nbsp;
+			&nbsp;<a href="{% url 'passage' passage.id nextpage %}#comments">下一页</a>&nbsp;
+			&nbsp;<a href="{% url 'passage' passage.id allpagenum %}#comments">尾页</a>&nbsp;
 		{% endif %}
 	</div>
 </div>

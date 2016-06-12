@@ -12,13 +12,14 @@ def getIPFromDJangoRequest(request):
     else:
         return request.META['REMOTE_ADDR']
 
-def addaccessamount(pid):
-    try:
-        accessamount=Passage.objects.get(id=pid).accessamount
-    except:
-        return 0
-    accessamount.amount+=1
-    accessamount.save()
+def addaccessamount(request,pid):
+    if not request.user.is_authenticated():
+        try:
+            accessamount=Passage.objects.get(id=pid).accessamount
+        except:
+            return 0
+        accessamount.amount+=1
+        accessamount.save()
 def check(string):
     if string=='':
         return 'none'
@@ -38,7 +39,7 @@ def passages(request,page):
     pinpagenum=10#passage in pages num
     passages=Passage.objects.order_by('-time')[(int(page)-1)*pinpagenum:int(page)*pinpagenum]
     allpassagenum=Passage.objects.count()
-    allpagenum=int(allpassagenum)/pinpagenum
+    allpagenum=int(allpassagenum)/pinpagenum+1
     if range(1,int(page))[5:]:
         betweenpagesbefore = range(1,int(page))[5:]
     else:
@@ -61,9 +62,9 @@ def passage1(request,pid):
     return passage(request,pid,1)
 
 def passage(request,pid,commentpage):
-    commentinpage=10
+    commentinpage=5
     context2={}
-    addaccessamount(pid)
+    addaccessamount(request,pid)
     passage=Passage.objects.get(id=pid)
     if request.method=="POST":        
         comment=Comment()
@@ -97,7 +98,7 @@ def passage(request,pid,commentpage):
             pass        
     comments=passage.comment_set.order_by('-time')[(int(commentpage)-1)*commentinpage:int(commentpage)*commentinpage]
     allpassagenum=passage.comment_set.count()
-    allpagenum=int(allpassagenum)/commentinpage
+    allpagenum=int(allpassagenum)/commentinpage+1
     if range(1,int(commentpage))[5:]:
         betweenpagesbefore = range(1,int(commentpage))[5:]
     else:
