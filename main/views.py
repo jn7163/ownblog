@@ -140,3 +140,18 @@ def add(request):
         return render(request,'add.html')
     else:
         return HttpResponseRedirect("/")
+
+def change(request,pid):
+    if request.user.is_authenticated():
+        passage=Passage.objects.get(id=pid)
+        if request.method=='POST':
+            passage.title = request.POST['title']
+            passage.body = request.POST['body']
+            passage.info = request.POST.get('info')
+            passage.changetime = timezone.now()
+            passage.save()
+            return HttpResponseRedirect("/"+str(pid))
+        else:          
+            return render(request,'change.html',{'passage':passage})
+    else:
+        return HttpResponseRedirect("/")

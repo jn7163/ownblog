@@ -1,11 +1,20 @@
 {% extends "base.html" %}
+{% load staticfiles %}
 {%block title%}{{passage.title}}-LCY's Blog{% endblock %}
+{% block head %}
+<link href="{% static 'main/css/prism.css' %}" rel="stylesheet" />
+<script src="{% static 'main/js/prism.js' %}"></script>
+{% endblock %}
 
 {%block content%}
 <div class="passage"> 
 	<h2>{{passage.title}}</h2>
+	{% if request.user.is_authenticated %}
+	<a href="{% url 'change' passage.id %}"><button>修改</button></a>
+	{% endif %}
 	<div class="passage-info">{{passage.info}}</div>
-	<div class="passage-time">{{passage.time}}</div>
+	<div class="passage-time">发布时间：{{passage.time}}</div>
+	{% if passage.changetime %}<div class="passage-time">上次修改：{{passage.changetime}}</div>{% endif %}
 	<br><br>
 	<div class="passage-body">{{passage.body|safe}}</div>
 </div>

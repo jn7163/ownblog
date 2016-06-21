@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{%block content%}
+{% if request.user.is_authenticated %}
+<form method="POST">
+	{% csrf_token %}
+	<label for="title">title</label>
+	<input type="text" name="title" id="title" style="width:100%;" value="{{passage.title}}"><br>
+	<label for="info">info</label><br>
+	<textarea name="info" id="info" style="height:150px;width:100%;">{{passage.info}}</textarea>
+	<label for="body">body</label><br>
+	<textarea name="body" id="body" style="height:600px;width:100%;">{{passage.body|safe}}</textarea>
+	<br>
+	<button type="submit">submit</button>
+</form>
+
+{% endif %}
+{% endblock %}

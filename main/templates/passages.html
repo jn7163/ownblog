@@ -8,7 +8,8 @@
 					<h5><a class="title-link" href="{% url 'passage' passage.id %}">{{passage.title}}</a></h5>
 					<div class="title-info">
 						<div class="passage-info">{{passage.info}}</div>
-						<div class="passage-time">{{passage.time}}</div>
+						<div class="passage-time">发布时间：{{passage.time}}</div>
+						{% if passage.changetime %}<div class="passage-time">上次修改：{{passage.changetime}}</div>{% endif %}
 					</div>
 				</div>
 			{% endfor %}			
