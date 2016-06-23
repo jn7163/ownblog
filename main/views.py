@@ -1,10 +1,14 @@
 from django.shortcuts import render
-from models import Passage,Comment,Accessamount
+from models import Passage,Comment,Accessamount,UpdataFile
 from django.utils import timezone
 from django.template import RequestContext
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
 from django.shortcuts import redirect
+import os
+MEDIA_URL = '/media/'
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+MEDIA_ROOT = os.path.join(BASE_DIR,'media')
 # Create your views here.
 def getIPFromDJangoRequest(request):
     if 'HTTP_X_FORWARDED_FOR' in request.META:
@@ -132,6 +136,7 @@ def add(request):
             passage.time = timezone.now()
             passage.info = request.POST.get('info')
             passage.save()
+
             accessamount = Accessamount()
             accessamount.passage = passage
             accessamount.amount=0
@@ -141,6 +146,34 @@ def add(request):
     else:
         return HttpResponseRedirect("/")
 
+def addfile(request):
+    if request.user.is_authenticated():
+        if request.method=='POST':
+            f = request.FILES.get('file',None)
+            if f:
+                updatafile = UpdataFile()
+                updatafile.name = f.name
+                updatafile.save()
+                savename = str(updatafile.id)+'.'+f.name.split(".")[-1]  
+                dest = open(os.path.join(MEDIA_ROOT, savename),'wb+')
+                dest.write(f.read())
+                dest.close()
+                updatafile.url=os.path.join(MEDIA_URL, savename)
+                print updatafile.url
+                updatafile.save()
+                return HttpResponseRedirect("/files")
+            else:
+                return render(request,'addfile.html',{'error':'none',})
+
+        else:
+            return render(request,'addfile.html')
+    else:
+        return HttpResponseRedirect("/")
+
+
+def files(request):
+    files=UpdataFile.objects.all().order_by('-id')
+    return render(request,'files.html',{'files':files})
 def change(request,pid):
     if request.user.is_authenticated():
         passage=Passage.objects.get(id=pid)

@@ -17,6 +17,7 @@
 	{% if passage.changetime %}<div class="passage-time">上次修改：{{passage.changetime}}</div>{% endif %}
 	<br><br>
 	<div class="passage-body">{{passage.body|safe}}</div>
+	<div>{% if passage.thefile %}<a href="{{passage.thefile}}"><button>附件下载</button></a>{% endif %}</div>
 </div>
 <a name="comments"></a>	
 <div class="comment">	

@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{%block content%}
+{% if request.user.is_authenticated %}
+<form method="POST" enctype="multipart/form-data">
+	{% csrf_token %}
+	{% if error %}<p style="color:red;">无上传文件</p>{% endif %}
+	<input type="file" name="file" id="file" />
+	<br>
+	<button type="submit">submit</button>
+</form>
+
+{% endif %}
+{% endblock %}

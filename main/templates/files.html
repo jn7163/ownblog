@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{%block content%}
+{% if request.user.is_authenticated %}
+<ul>
+{% for file in files %}
+	<li><a href="{{file.url}}">{{file.name}}</a>---url:  {{file.url}}</li>
+{% endfor  %}
+</ul>
+{% endif %}
+{% endblock %}

@@ -1,11 +1,13 @@
 {% extends "base.html" %}
+{% load staticfiles %}
 {%block title%}LCY's Blog{% endblock %}
 {% block beforecontent %}
 	<h2>About</h2>
 	<h4></h4><!--just a little title-->
 {% endblock %}
 {% block content %}
-	<p>太懒了</p>
-	<p>css不想动它了……</p>
+	<p>考试周即将到来……我却沉迷代码……</p>
+	<p>考试要挂的感觉</p>
+	<img src="{% static 'main/img/about-nospeaking.jpg' %}" style="height:400px;width:100;" />
 {% endblock %}
 

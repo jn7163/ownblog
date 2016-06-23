@@ -7,6 +7,7 @@ class Passage(models.Model):
     body  = models.TextField()
     time  = models.DateTimeField(timezone.now)
     changetime = models.DateTimeField(timezone.now,blank=True,null=True)
+    #thefile = models.FileField(upload_to = 'media/', blank=True,default='')
     info  = models.TextField(blank=True,null=True)
     def __unicode__(self):
         return smart_unicode(self.title)
@@ -26,3 +27,9 @@ class Accessamount(models.Model):
     amount = models.IntegerField()
     def __unicode__(self):
         return smart_unicode(self.passage)
+
+class UpdataFile(models.Model):
+    name = models.CharField(max_length=20)
+    url = models.CharField(max_length=20,blank=True)
+    def __unicode__(self):
+        return smart_unicode(self.name)

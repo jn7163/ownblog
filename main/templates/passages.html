@@ -5,7 +5,7 @@
 		{% if passages %}
 			{% for passage in passages %}
 				<div class="title-content">
-					<h5><a class="title-link" href="{% url 'passage' passage.id %}">{{passage.title}}</a></h5>
+					<h3><a class="title-link" href="{% url 'passage' passage.id %}">{{passage.title}}</a></h3>
 					<div class="title-info">
 						<div class="passage-info">{{passage.info}}</div>
 						<div class="passage-time">发布时间：{{passage.time}}</div>

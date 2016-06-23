@@ -12,7 +12,10 @@
 		{% if passages %}
 			{% for passage in passages %}
 				<div class="title-content">
-					<h5><a class="title-link" href="{% url 'passage' passage.id %}">{{passage.title}}</a></h5>
+					<div>
+						<h2><a class="title-link" href="{% url 'passage' passage.id %}">{{passage.title}}</a></h2>
+					</div>
+
 					<div class="title-info">
 						<div class="passage-info">{{passage.info}}</div>
 						<div class="passage-time">{{passage.time}}</div>

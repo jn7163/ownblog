@@ -11,5 +11,7 @@ urlpatterns = [
     url(r'^(?P<pid>[0-9]+)/(?P<commentpage>[0-9]+)$',views.passage,name='passage'),
     url(r'^about$',views.about,name='about'),
     url(r'^add$',views.add,name='add'),
+    url(r'^files$',views.files,name='files'),
+    url(r'^addfile$',views.addfile,name='addfile'),
     url(r'^change/(?P<pid>[0-9]+)$',views.change,name='change')
 ]
