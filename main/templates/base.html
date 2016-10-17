@@ -13,6 +13,7 @@
 		<a href="http://182.254.132.38:88/" class="header_a">留言板 </a>
 		<a href="{% url 'about' %}" class="header_a">关于我</a>	
 		<a href="http://lichunown.github.io/" class="header_a">github.io</a>	
+		<a style="float:right;" href="{% url 'oauth_tencent' %}"><img src="{% static 'oauth/Connet_logo_1.png' %}">QQ登录</a>
 	</header>
 	<div class="beforecontent">
 		{% block beforecontent %}

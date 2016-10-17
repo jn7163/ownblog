@@ -34,6 +34,7 @@ else:
 # Application definition
 
 INSTALLED_APPS = (
+    'oauth',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

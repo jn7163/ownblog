@@ -164,7 +164,6 @@ def addfile(request):
                 return HttpResponseRedirect("/files")
             else:
                 return render(request,'addfile.html',{'error':'none',})
-
         else:
             return render(request,'addfile.html')
     else:

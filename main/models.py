@@ -33,3 +33,11 @@ class UpdataFile(models.Model):
     url = models.CharField(max_length=20,blank=True)
     def __unicode__(self):
         return smart_unicode(self.name)
+
+#
+#function toStringNum(num){var str=num.toString();var addchar="";for(var i = 0;i<4-str.length;i++){addchar +="0";}return addchar+num.toString();}
+# for(var i =0;1<=9999;i++){
+#     strnum= toStringNum(i);
+#     send(strnum);
+# }
+# function send(msg){$.get("https://xdmsc_recruit.leanapp.cn/final?code="+msg,function(req){console.log(req);});}
